@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en" class="js-intro is-intro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velora — The nonprofit operations suite</title>
+<script>if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.remove('js-intro', 'is-intro');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Inter at opsz 32 = Inter Display -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181818; --ink-2:#484c51; --rose:#E55A7F; --coral:#E65946; --logo:#E84C59;
+  --page:#F7F7F7; --white:#fff; --tile-line:#EDEBEA; --grid-line:#E5E5E5; --btn-top:#2B2527;
+  --line-08:rgba(24,24,24,.08); --line-07:rgba(24,24,24,.07); --line-06:rgba(24,24,24,.06);
+  --ink-80:rgba(24,24,24,.8); --ink-70:rgba(24,24,24,.7); --ink-60:rgba(24,24,24,.6); --ink-55:rgba(24,24,24,.55);
+  --ink-50:rgba(24,24,24,.5); --ink-45:rgba(24,24,24,.45); --ink-40:rgba(24,24,24,.4); --ink-25:rgba(24,24,24,.25);
+  --ease-move:cubic-bezier(.22,1,.36,1); --ease-inset:cubic-bezier(.65,0,.35,1);
+  --rail:11px; --gut:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html.is-intro{overflow:hidden}
+body{background:var(--page);color:var(--ink);font-family:Manrope,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.display{font-family:Inter,system-ui,sans-serif;font-variation-settings:"opsz" 32}
+.inter{font-family:Inter,system-ui,sans-serif;font-variation-settings:"opsz" 14}
+.skip{position:absolute;left:16px;top:-60px;z-index:200;background:var(--ink);color:#fff;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600}
+.skip:focus{top:12px}
+
+/* ---------- frame ---------- */
+.page{position:relative;width:100%;max-width:1440px;margin:0 auto;padding-bottom:80px}
+.rails{position:absolute;inset:0;pointer-events:none;z-index:3}
+.rails::before,.rails::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--line-08)}
+.rails::before{left:var(--rail)}.rails::after{right:var(--rail)}
+.header-rule{position:absolute;left:var(--rail);right:var(--rail);top:69px;height:1px;background:var(--line-08);transform-origin:left center;z-index:1}
+
+/* ---------- header ---------- */
+.header{position:relative;z-index:70;height:69px;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 32px}
+.header-left,.header-right{width:240px;height:48px;display:flex;align-items:center}
+.header-right{justify-content:flex-end}
+.header-logo{display:block;width:128px;height:20px}
+.nav{position:absolute;left:calc(50% - .5px);top:calc(50% - .5px);transform:translate(-50%,-50%);display:flex;align-items:center;gap:2px;background:rgba(24,24,24,.04);border-radius:6px;overflow:hidden}
+.nav-item{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:8px;font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;transition:background .2s}
+.nav-item:hover{background:rgba(24,24,24,.04)}
+.icon-tile{position:relative;width:40px;height:40px;background:var(--page);border:1px solid var(--tile-line);border-radius:2px;flex:none;display:grid;place-items:center}
+.icon-tile img{width:16px;height:16px;margin-top:-1px}
+.chev{width:14px;height:14px}
+.btn-s{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border:1px solid var(--grid-line);border-radius:6px;font-family:Inter,sans-serif;font-weight:500;font-size:15px;line-height:20px;letter-spacing:-.6px;color:var(--ink);transition:border-color .2s}
+.btn-s:hover{border-color:#cfcfcf}
+.menu-btn{display:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;margin:10px var(--gut) 0;background:#fff;border:1px solid var(--line-08);border-radius:6px;overflow:hidden}
+.hero-area{position:relative;height:568px}
+.hero-lines{position:absolute;left:0;top:0;width:100%;height:570px}
+.hero-content{position:absolute;z-index:60;left:calc(50% - .5px);top:50%;transform:translate(-50%,-50%);width:720px;max-width:calc(100% - 32px);display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center}
+.hero-text{display:flex;flex-direction:column;align-items:center;gap:32px;width:100%}
+.hero-title{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:2px 12px 2px 2px;background:var(--page);border:1px solid var(--line-08);border-radius:4px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.badge-tile{position:relative;width:28px;height:28px;background:#fff;border:1px solid var(--tile-line);border-radius:2px;flex:none;overflow:hidden}
+.badge-bars{position:absolute;left:6.75px;top:6px;display:flex;align-items:flex-end;gap:2px;height:14px}
+.badge-bars i{display:block;width:1px}
+.badge-label,.section-label{font-size:12px;font-weight:500;letter-spacing:.24px;text-transform:uppercase;color:var(--ink-80);white-space:nowrap}
+.grad,.grad-soft{-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad{background-image:linear-gradient(90deg,var(--ink),var(--ink-2))}
+.grad-soft{background-image:linear-gradient(90deg,rgba(24,24,24,.6),rgba(72,76,81,.3))}
+.h1{font-size:80px;line-height:1;font-weight:800;letter-spacing:-4.8px;white-space:nowrap}
+/* background-clip:text only paints inside the box: pad it so descenders and the last glyph are not cut */
+.h1 span{display:block;padding:0 .08em .16em;margin:0 -.08em -.16em}
+.h2 span{display:inline-block;padding:0 .08em .16em;margin:0 -.08em -.16em}
+.stat b{padding:0 .08em .14em;margin:0 -.08em -.14em}
+.lead{font-size:18px;line-height:28px;color:var(--ink-60);width:100%}
+.btn-l{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:16px;height:56px;padding:4px 4px 4px 24px;border-radius:6px;background:linear-gradient(180deg,var(--btn-top),var(--ink));box-shadow:inset 0 0 10px 0 rgba(255,255,255,.6);color:#fff;font-family:Inter,sans-serif;font-weight:500;font-size:16px;line-height:20px;letter-spacing:-.64px;white-space:nowrap;transition:transform .3s var(--ease-move)}
+.chip{position:relative;width:48px;height:48px;flex:none;border-radius:2px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(135deg,var(--coral) 0%,var(--rose) 100%);background-size:200% 200%;animation:chip-base 9s ease-in-out infinite alternate}
+.chip::before,.chip::after{content:"";position:absolute;border-radius:50%;filter:blur(10px);pointer-events:none;z-index:0}
+.chip::before{width:46px;height:56px;left:-14px;top:-6px;background:#EB796B;animation:chip-coral 7s ease-in-out infinite alternate}
+.chip::after{width:40px;height:46px;left:22px;top:18px;background:linear-gradient(135deg,rgba(255,255,255,.2),#fff);opacity:.8;animation:chip-light 8s ease-in-out infinite alternate}
+.chip i{position:absolute;inset:0;z-index:1;border-radius:2px;box-shadow:inset 0 0 13.6px 0 rgba(255,255,255,.6)}
+.chip svg{position:absolute;left:14px;top:14px;z-index:2;width:20px;height:20px;transition:transform .3s var(--ease-move)}
+.btn-l:hover .chip svg{transform:translateX(2px)}
+@keyframes chip-base{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+@keyframes chip-coral{0%{transform:translate(0,0) scale(1)}35%{transform:translate(10px,14px) scale(1.15)}70%{transform:translate(18px,2px) scale(.9)}100%{transform:translate(4px,20px) scale(1.1)}}
+@keyframes chip-light{0%{transform:translate(0,0) scale(1);opacity:.8}40%{transform:translate(-14px,-8px) scale(1.2);opacity:.55}75%{transform:translate(-4px,-20px) scale(.9);opacity:.75}100%{transform:translate(-18px,2px) scale(1.05);opacity:.6}}
+.btn-l:hover{transform:translateY(-1px)}
+
+.logo-row{position:relative;z-index:60;display:flex;height:92px;border-top:1px solid var(--line-08)}
+.logo-caption{flex:0 0 302px;display:flex;align-items:center;padding:0 28px;border-right:1px solid var(--line-08);font-size:16px;line-height:24px;color:var(--ink-60)}
+.marquee{position:relative;flex:1;min-width:0;overflow:hidden}
+.strip{position:absolute;left:40px;top:21.75px;display:flex;gap:24px;align-items:center;animation:marquee 40s linear infinite}
+.logo{position:relative;width:121.226px;height:48.491px;flex:none;opacity:.55}
+.logo.flat{opacity:1}
+.logo img{position:absolute}
+.logo .fb{inset:30% 7.11% 28.13% 7.28%;width:85.61%;height:41.87%}
+.logo .gg{left:calc(50% - .04px);top:calc(50% - .56px);width:84.788px;height:27.974px;transform:translate(-50%,-50%)}
+.logo .yt{inset:27.5% 10.62% 28.49% 10.55%;width:78.83%;height:44.01%}
+.logo .wf{inset:0;width:100%;height:100%}
+.fade{position:absolute;top:0;width:120px;height:92px;pointer-events:none;z-index:2}
+.fade.l{left:0;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))}
+.fade.r{right:0;background:linear-gradient(90deg,rgba(255,255,255,0),#fff)}
+@keyframes marquee{to{transform:translateX(calc(-50% - 12px))}}
+
+/* ---------- products ---------- */
+.products{position:relative;margin:10px var(--gut) 0;height:659px;border-radius:6px;overflow:hidden;background:#E55A7F url(assets/products-bg.svg) center/cover no-repeat}
+.products-decor{position:absolute;left:0;top:0;width:100%;height:659px;pointer-events:none}
+.p-stage{position:relative;z-index:1;height:100%;display:flex;align-items:center;padding:0 94px}
+.p-list{width:380px;flex:none;display:flex;flex-direction:column;gap:8px}
+.p-item{display:flex;align-items:center;gap:12px;padding:4px;border-radius:6px;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;transition:background .25s}
+.p-item:hover{background:#fff}
+.p-item > img{width:44px;height:44px;flex:none}
+.p-item.is-active{background:#fff;border:1px solid #fff;box-shadow:0 12px 28px -6px rgba(168,36,63,.18)}
+.p-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.p-text b{font-size:15px;font-weight:600;line-height:normal;white-space:nowrap}
+.p-text span{font-size:13px;line-height:1.4;color:var(--ink-70)}
+.p-item.is-active .p-text span{color:rgba(24,24,24,.65)}
+.p-go{width:44px;height:44px;flex:none;display:grid;place-items:center;background:#F0F0F0;border-radius:2px}
+.p-go img{width:20px;height:20px}
+.beam{position:relative;flex:1;min-width:24px;height:1.5px}
+.beam > img{position:absolute;left:0;top:-.75px;width:100%;height:1.5px}
+.beam .pulse{position:absolute;left:calc(50% - 16px);top:-16px;width:32px;height:32px}
+.symbol{position:relative;width:88px;height:88px;flex:none;background:#fff;border:1px solid rgba(229,90,127,.25);border-radius:6px;box-shadow:0 8px 32px 0 rgba(229,90,127,.28);display:grid;place-items:center}
+.symbol img{width:40px;height:19px}
+
+.window{width:370px;flex:none;display:flex;flex-direction:column;gap:4px;padding:4px;border-radius:6px;background:rgba(247,247,247,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 24px 48px -8px rgba(143,29,58,.22);overflow:hidden}
+.app-bar{display:flex;gap:6px;align-items:center;padding:2px 0 2px 4px;font-size:12px;white-space:nowrap}
+.app-bar b{font-weight:600}.app-bar .sep{font-weight:500;color:var(--ink-25)}.app-bar .cur{font-weight:500;color:var(--ink-55)}
+.panel{background:#fff;border:1px solid var(--line-06);border-radius:4px;overflow:hidden}
+.campaign{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line-07)}
+.campaign > img{width:36px;height:36px;flex:none;border-radius:2px}
+.campaign .tt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;white-space:nowrap}
+.campaign .tt b{font-size:15px;font-weight:600;letter-spacing:-.15px}
+.campaign .tt span{font-size:11px;font-weight:500;color:var(--ink-50)}
+.status{display:flex;align-items:center;gap:6px;padding:4px 8px;background:var(--page);border:1px solid var(--line-08);border-radius:4px;font-size:10px;font-weight:500;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-80)}
+.status .dot{position:relative;width:6px;height:6px}
+.status .dot img{position:absolute;left:-5px;top:-5px;width:16px;height:16px}
+.raised{display:flex;flex-direction:column;gap:8px;padding:14px 16px 12px;border-bottom:1px solid var(--line-07)}
+.amount{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.amount b{font-size:32px;font-weight:600;letter-spacing:-1.28px}
+.amount span{font-size:13px;font-weight:500;color:var(--ink-45)}
+.ticks{display:flex;align-items:flex-end;justify-content:space-between}
+.ticks i{display:block;width:3px;height:16px;border-radius:1px}
+.ticks i.off{height:12px;background:rgba(24,24,24,.1)}
+.lbls{display:flex;justify-content:space-between;font-size:11px;white-space:nowrap}
+.lbls b{font-weight:600;color:var(--ink-80)}.lbls span{font-weight:500;color:var(--ink-50)}
+.stats3{display:flex;border-bottom:1px solid var(--line-07)}
+.stats3 > div{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding:10px 12px 10px 16px;border-right:1px solid var(--line-07)}
+.stats3 > div:last-child{border-right:0}
+.stats3 small{font-size:11px;font-weight:500;color:var(--ink-50)}
+.stats3 .v{display:flex;align-items:center;gap:6px}
+.stats3 b{font-size:16px;font-weight:600;letter-spacing:-.32px}
+.delta{padding:1px 4px;border-radius:2px;background:rgba(47,179,138,.12);color:#1f7a5c;font-size:10px;font-weight:600}
+.gifts{display:flex;flex-direction:column;padding:10px 16px 4px}
+.gifts .hd{padding-bottom:6px;font-size:11px;font-weight:600;color:var(--ink-80)}
+.gift{display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--line-07);white-space:nowrap}
+.av{width:24px;height:24px;flex:none;display:grid;place-items:center;background:var(--page);border:1px solid var(--tile-line);border-radius:2px;font-size:9px;font-weight:700;color:var(--ink-70)}
+.gift .nm{flex:1;min-width:0;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500}
+.tag{display:flex;align-items:center;gap:4px;padding:2px 6px 2px 5px;background:rgba(91,63,212,.07);border:1px solid rgba(91,63,212,.35);border-radius:2px;font-size:9px;font-weight:600;color:#4a30b8}
+.tag img{width:10px;height:10px}
+.gift .amt{font-size:12px;font-weight:600}
+.gift .ago{width:21px;font-size:11px;font-weight:500;color:var(--ink-40)}
+.ma{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 12px;border-top:1px solid var(--line-07);background:linear-gradient(90deg,rgba(239,222,222,.7),rgba(239,222,222,.25))}
+.spark{position:relative;width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:2px;background:linear-gradient(135deg,var(--coral) 0%,var(--rose) 70.721%);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.3)}
+.spark img{width:14px;height:14px}
+.ma .tx{display:flex;flex-direction:column;gap:1px;white-space:nowrap}
+.ma small{font-size:10px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-50)}
+.ma span{font-size:12px;font-weight:500;color:rgba(24,24,24,.9)}
+
+.p-item{cursor:pointer;outline:none}
+.p-item:focus-visible{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--rose)}
+.p-item .p-go{display:none}
+.p-item.is-active .p-go{display:grid}
+.p-go:hover{background:#E6E6E6}
+.p-go:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+.panel{transition:opacity .22s var(--ease-move),transform .22s var(--ease-move)}
+.panel.is-swapping{opacity:0;transform:translateY(6px)}
+.campaign > img.lg{width:36px;height:36px}
+
+/* ---------- social proof ---------- */
+.proof{position:relative;z-index:2;margin:80px var(--rail) 0;display:flex;height:563px;border-top:1px solid var(--grid-line);border-bottom:1px solid var(--grid-line)}
+.proof-intro{position:relative;width:50%;display:flex;flex-direction:column;justify-content:space-between;padding:48px 40px}
+.proof-intro .decor{position:absolute;left:0;top:1px;width:calc(100% + 3px);height:562px;pointer-events:none}
+.proof-heading{position:relative;flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:16px;max-width:425px}
+.section-badge{display:flex;align-items:center;height:34px;padding:2px 12px;background:#fff;border:1px solid var(--line-08);border-radius:4px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.h2{font-size:64px;line-height:1;font-weight:800;letter-spacing:-3.84px}
+.proof-body{position:relative;max-width:446px;font-size:18px;line-height:28px;color:var(--ink-60)}
+.stats{width:50%;display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--grid-line);overflow:hidden}
+.stats-row{flex:1;display:flex;min-height:0}
+.stats-row + .stats-row{border-top:1px solid var(--grid-line)}
+.cell{position:relative;flex:1;min-width:0;display:flex;padding:8px}
+.cell + .cell{border-left:1px solid var(--grid-line)}
+.stats-row:last-child .cell + .cell{border-left:1px solid var(--grid-line)}
+.stat{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:28px;background:var(--page);border-radius:6px;overflow:hidden}
+.stat b{font-size:72px;line-height:1;font-weight:700;letter-spacing:-4.32px;white-space:nowrap}
+.stat b em{font-style:normal;color:var(--rose);-webkit-text-fill-color:var(--rose)}
+.stat span{max-width:269px;font-size:18px;line-height:28px;color:var(--ink-60)}
+.cell .decor{position:absolute;left:1.5px;top:0;width:calc(100% - 1.5px);height:100%}
+
+/* ---------- loader overlay ---------- */
+#intro{position:fixed;inset:0;z-index:50;pointer-events:none}
+.ld-border,.ld-fill{position:absolute;inset:0}
+.ld-border{background:var(--line-08)}
+.ld-fill{background:#fff}
+.ld-rays{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ld-rays line{stroke:var(--ink);stroke-opacity:.08;stroke-width:1}
+.ld-logo{position:absolute;left:0;top:0;width:517px;height:81px;transform-origin:0 0;overflow:visible}
+.ld-counter{position:absolute;left:0;top:0;width:120px;margin-left:-60px;text-align:center;font-size:14px;font-weight:500;letter-spacing:.04em;color:var(--ink-55);font-variant-numeric:tabular-nums}
+
+/* intro states */
+.js-intro .header-logo{opacity:0}
+.js-intro .nav,.js-intro .header-right{opacity:0;transition:opacity .4s var(--ease-move)}
+.js-intro .header-rule{transform:scaleX(0);transition:transform .45s var(--ease-inset)}
+.js-intro .hero-anim{opacity:0;transform:translateY(16px);transition:opacity .45s var(--ease-move),transform .45s var(--ease-move)}
+.js-intro .logo-row{opacity:0;transition:opacity .4s var(--ease-move)}
+.js-intro .products{opacity:0;transform:translateY(100vh);transition:transform .5s var(--ease-move),opacity .3s linear}
+.js-intro .proof{opacity:0;transition:opacity .4s linear}
+.s-nav .nav,.s-nav .header-right{opacity:1}
+.s-rule .header-rule{transform:scaleX(1)}
+.s-hero .hero-anim{opacity:1;transform:none}
+.s-hero .hero-anim.d1{transition-delay:.06s}.s-hero .hero-anim.d2{transition-delay:.12s}.s-hero .hero-anim.d3{transition-delay:.18s}
+.s-hero .logo-row{opacity:1;transition-delay:.12s}
+.s-block .products{opacity:1;transform:none}
+.s-block .proof{opacity:1;transition-delay:.3s}
+.s-logo .header-logo{opacity:1}
+body.fade-in{animation:fadein .2s linear both}
+@keyframes fadein{from{opacity:0}}
+
+/* ---------- responsive (fluid) ---------- */
+@media (max-width:1320px){
+  .p-stage{padding:0 48px}
+  .p-list{width:340px}
+  .window{width:350px}
+}
+@media (max-width:1180px){
+  .nav{display:none}
+  .header-right{width:auto;gap:8px}
+  .menu-btn{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--grid-line);border-radius:6px}
+  .products{height:auto}
+  .products-decor{display:none}
+  .p-stage{flex-direction:column;gap:32px;padding:56px 24px}
+  .p-list{width:100%;max-width:420px}
+  .beam,.symbol{display:none}
+  .window{width:100%;max-width:370px}
+  .proof{flex-direction:column;height:auto}
+  .proof-intro,.stats{width:100%}
+  .proof-intro{gap:48px}
+  .stats{border-left:0;border-top:1px solid var(--grid-line)}
+  .stats-row{height:280px;flex:none}
+}
+@media (max-width:820px){
+  :root{--rail:8px;--gut:12px}
+  .header{padding:0 16px}
+  .header-left{width:auto}
+  .btn-s{height:40px;padding:0 14px;font-size:14px}
+  .menu-btn{width:40px;height:40px}
+  .hero-area{height:auto;min-height:560px}
+  .hero-content{position:relative;left:auto;top:auto;transform:none;margin:0 auto;padding:56px 0 64px}
+  .h1{font-size:46px;letter-spacing:-2.6px;white-space:normal}
+  .lead{font-size:16px;line-height:24px}
+  .badge-label{font-size:10px}
+  .logo-row{flex-direction:column;height:auto}
+  .logo-caption{flex:none;height:72px;border-right:0;border-bottom:1px solid var(--line-08);justify-content:center;text-align:center}
+  .marquee{height:92px}
+  .proof-intro{padding:40px 20px}
+  .h2{font-size:44px;letter-spacing:-2.6px}
+  .stats-row{height:200px}
+  .stat{padding:18px}
+  .stat b{font-size:42px;letter-spacing:-2.4px}
+  .stat span{font-size:15px;line-height:22px}
+}
+@media (prefers-reduced-motion:reduce){.strip,.chip,.chip::before,.chip::after{animation:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page" id="page">
+  <div class="rails" aria-hidden="true"></div>
+  <div class="header-rule" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="header-left"><a class="header-logo" id="headerLogo" href="#" aria-label="Velora home"><img src="assets/logo.svg" width="128" height="20" alt="Velora"></a></div>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-item display" href="#"><span class="icon-tile"><img src="assets/icon-platform.svg" width="16" height="16" alt=""></span>Platform<img class="chev" src="assets/icon-chev.svg" width="14" height="14" alt=""></a>
+      <a class="nav-item display" href="#"><span class="icon-tile"><img src="assets/icon-products.svg" width="16" height="16" alt=""></span>Products<img class="chev" src="assets/icon-chev.svg" width="14" height="14" alt=""></a>
+      <a class="nav-item display" href="#"><span class="icon-tile"><img src="assets/icon-solutions.svg" width="16" height="16" alt=""></span>Solutions<img class="chev" src="assets/icon-chev.svg" width="14" height="14" alt=""></a>
+      <a class="nav-item display" href="#"><span class="icon-tile"><img src="assets/icon-resources.svg" width="16" height="16" alt=""></span>Resources<img class="chev" src="assets/icon-chev.svg" width="14" height="14" alt=""></a>
+      <a class="nav-item display" href="#"><span class="icon-tile"><img src="assets/icon-company.svg" width="16" height="16" alt=""></span>Company</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn-s" href="#">Book a demo</a>
+      <button class="menu-btn" type="button" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6h12M3 12h12" stroke="#181818" stroke-width="1.4"/></svg></button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" aria-busy="false">
+    <section class="hero" id="hero" aria-labelledby="heroTitle">
+      <div class="hero-area" id="heroArea">
+        <img class="hero-lines" src="assets/hero-decor-lines.svg" alt="" aria-hidden="true">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-title">
+              <div class="badge hero-anim">
+                <span class="badge-tile"><span class="badge-bars"><i style="height:8px;background:#5b3fd4"></i><i style="height:11px;background:#8551cf"></i><i style="height:14px;background:#2b587a"></i><i style="height:11px;background:#45795a"></i><i style="height:8px;background:#d6607f"></i></span></span>
+                <span class="badge-label">The nonprofit operations suite</span>
+              </div>
+              <h1 class="h1 hero-anim d1" id="heroTitle"><span class="grad">Do more good</span><span class="grad-soft">with what you have</span></h1>
+            </div>
+            <p class="lead display hero-anim d2">Velora helps lean nonprofit teams raise more, save hours every week and make confident decisions — with fundraising, donors, grants and finances working together.</p>
+          </div>
+          <a class="btn-l hero-anim d3" href="#">Book a demo<span class="chip" aria-hidden="true"><i></i><svg viewBox="0 0 20 20" fill="none"><path d="M4 10H15.5M10.5 15L15.5 10L10.5 5" stroke="white" stroke-width="2" stroke-linecap="square"/></svg></span></a>
+        </div>
+      </div>
+      <div class="logo-row">
+        <div class="logo-caption display">Trusted by 1,000+<br>nonprofits and foundations</div>
+        <div class="marquee" aria-label="Customer logos">
+          <div class="strip" id="strip">
+            <div class="logo"><img class="fb" src="assets/logo-facebook.svg" width="104" height="21" alt="Facebook"></div>
+            <div class="logo"><img class="gg" src="assets/logo-google.svg" width="85" height="28" alt="Google"></div>
+            <div class="logo"><img class="yt" src="assets/logo-youtube.svg" width="96" height="22" alt="YouTube"></div>
+            <div class="logo flat"><img class="wf" src="assets/logo-webflow.svg" width="122" height="49" alt="Webflow"></div>
+            <div class="logo"><img class="fb" src="assets/logo-facebook.svg" width="104" height="21" alt="Facebook"></div>
+            <div class="logo"><img class="gg" src="assets/logo-google.svg" width="85" height="28" alt="Google"></div>
+            <div class="logo"><img class="yt" src="assets/logo-youtube.svg" width="96" height="22" alt="YouTube"></div>
+            <div class="logo flat"><img class="wf" src="assets/logo-webflow.svg" width="122" height="49" alt="Webflow"></div>
+          </div>
+          <div class="fade l"></div><div class="fade r"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products" aria-label="Products">
+      <img class="products-decor" src="assets/products-decor.svg" alt="" aria-hidden="true">
+      <div class="p-stage">
+        <div class="p-list" role="tablist" aria-label="Velora products">
+          <div class="p-item" role="tab" tabindex="-1" aria-selected="false" aria-controls="productWindow" data-product="donor-management"><img src="assets/pl-donor-management.svg" width="44" height="44" alt=""><span class="p-text"><b>Donor Management</b><span>Engage more. Know every donor better.</span></span><a class="p-go" href="/products/donor-management" aria-label="Open Donor Management"><img src="assets/icon-arrow.svg" width="20" height="20" alt=""></a></div>
+          <div class="p-item" role="tab" tabindex="-1" aria-selected="false" aria-controls="productWindow" data-product="mission-assistant"><img src="assets/pl-mission-assistant.svg" width="44" height="44" alt=""><span class="p-text"><b>Mission Assistant</b><span>Operate your nonprofit with AI workflows.</span></span><a class="p-go" href="/products/mission-assistant" aria-label="Open Mission Assistant"><img src="assets/icon-arrow.svg" width="20" height="20" alt=""></a></div>
+          <div class="p-item is-active" role="tab" tabindex="0" aria-selected="true" aria-controls="productWindow" data-product="fundraising"><img src="assets/pl-fundraising.svg" width="44" height="44" alt=""><span class="p-text"><b>Fundraising</b><span>Run campaigns that convert more donors.</span></span><a class="p-go" href="/products/fundraising" aria-label="Open Fundraising"><img src="assets/icon-arrow.svg" width="20" height="20" alt=""></a></div>
+          <div class="p-item" role="tab" tabindex="-1" aria-selected="false" aria-controls="productWindow" data-product="grant-management"><img src="assets/pl-grant-management.svg" width="44" height="44" alt=""><span class="p-text"><b>Grant Management</b><span>Streamline your entire grant lifecycle.</span></span><a class="p-go" href="/products/grant-management" aria-label="Open Grant Management"><img src="assets/icon-arrow.svg" width="20" height="20" alt=""></a></div>
+          <div class="p-item" role="tab" tabindex="-1" aria-selected="false" aria-controls="productWindow" data-product="fund-accounting"><img src="assets/pl-fund-accounting.svg" width="44" height="44" alt=""><span class="p-text"><b>Fund Accounting</b><span>Account for every dollar, confidently.</span></span><a class="p-go" href="/products/fund-accounting" aria-label="Open Fund Accounting"><img src="assets/icon-arrow.svg" width="20" height="20" alt=""></a></div>
+        </div>
+        <div class="beam" aria-hidden="true"><img src="assets/beam-in.svg" width="180" height="2" alt=""><img class="pulse" src="assets/beam-pulse.svg" width="32" height="32" alt=""></div>
+        <div class="symbol" aria-hidden="true"><img src="assets/velora-mark.svg" width="40" height="19" alt=""></div>
+        <div class="beam" aria-hidden="true"><img src="assets/beam-out.svg" width="190" height="2" alt=""><img class="pulse" src="assets/beam-pulse.svg" width="32" height="32" alt=""></div>
+        <div class="window" id="productWindow" role="tabpanel" aria-live="polite">
+          <div class="app-bar"><b data-f="product">Fundraising</b><span class="sep">/</span><span class="cur" data-f="crumb">Year-end appeal</span></div>
+          <div class="panel" id="panel"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-labelledby="proofTitle">
+      <div class="proof-intro">
+        <img class="decor" src="assets/proof-decor-line.svg" alt="" aria-hidden="true">
+        <div class="proof-heading">
+          <div class="section-badge"><span class="section-label">Proven at scale</span></div>
+          <h2 class="h2" id="proofTitle"><span class="grad">Proven at </span><span class="grad-soft">scale</span></h2>
+        </div>
+        <p class="proof-body display">Velora brings together products that thousands of organizations already rely on.</p>
+      </div>
+      <div class="stats">
+        <div class="stats-row">
+          <div class="cell"><div class="stat"><b class="grad">15K<em>+</em></b><span class="display">nonprofits use Velora's products</span></div></div>
+          <div class="cell"><div class="stat"><b class="grad">$9B<em>+</em></b><span class="display">raised through Velora’s tools</span></div></div>
+        </div>
+        <div class="stats-row">
+          <div class="cell"><div class="stat"><b class="grad">10.5M</b><span class="display">unique donors supported</span></div></div>
+          <div class="cell"><img class="decor" src="assets/proof-decor-line-cell.svg" alt="" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="velora-wordmark" viewBox="0 0 517 81"><g fill="#E84C59">
+      <path d="M392.145 19.4787C393.248 19.4142 394.354 19.379 395.457 19.3732C402.598 19.3797 409.132 21.3165 414.271 26.549C425.634 38.1152 425.772 61.7769 414.36 73.3437C410.404 77.3506 403.914 80.3584 398.256 80.3511C397.825 80.3994 397.39 80.4387 396.956 80.4691C359.08 83.0922 357.641 21.7606 392.145 19.4787ZM397.148 72.8839C402.028 72.2447 405.971 70.9597 409.127 66.8496C413.953 60.5632 414.829 52.1616 413.809 44.5328C412.401 33.073 405.34 26.2472 393.669 26.9921C393.599 26.9967 393.551 27.0138 393.485 27.0367C388.108 27.5191 384.733 28.6959 381.209 33C376.736 38.462 375.476 46.8002 376.208 53.6358C377.528 65.9955 384.117 73.5659 397.148 72.8839Z"/>
+      <path d="M303.889 19.4776C305.01 19.4256 306.133 19.3921 307.254 19.377C327.242 19.2864 333.929 35.0419 333.985 52.1884L287.973 52.1831C288.629 57.8334 289.565 63.3492 293.673 67.6614C299.138 73.4025 308.849 74.2778 315.865 71.1554C318.331 70.0577 320.442 67.9173 322.358 66.0742C323.683 64.3498 324.198 63.5596 325.235 61.6495C327.462 62.6803 330.474 63.7307 332.791 64.5622C328.838 74.1711 320.098 79.5377 309.955 80.4369C292.585 82.0626 280.644 70.1194 279.501 53.339C278.39 37.0131 285.637 20.8284 303.889 19.4776ZM288.147 45.5421L309.114 45.5637L325.488 45.5582C324.657 41.0213 324.117 37.2517 321.418 33.2946C317.579 27.6653 311.399 26.1231 304.904 26.7442C292.989 28.6981 290.3 34.5962 288.147 45.5421Z"/>
+      <path d="M217.16 1.59126C219.826 1.50222 222.733 1.5543 225.418 1.55101C226.285 3.29198 227.645 7.52119 228.324 9.50567L233.186 23.6709C238.449 38.8276 244.319 54.9217 249.146 70.1392C252.615 58.6842 257.255 46.3217 261.216 34.9399C265.02 24.0054 268.832 12.3981 272.864 1.61545C275.587 1.47981 278.46 1.55912 281.199 1.59187C280.901 3.09617 279.387 7.11491 278.814 8.74704C276.741 14.3488 274.734 20.5821 272.753 26.2844L254.506 78.9913C250.941 78.9674 247.377 78.975 243.813 79.014C241.747 72.0199 238.607 64.0765 236.27 57.0228C230.155 38.5618 223.203 20.0392 217.16 1.59126Z"/>
+      <path d="M457.627 20.4908C459.053 20.1723 461.729 20.636 463.231 20.8586L463.233 28.4305C453.817 26.4372 446.153 30.4124 443.669 40.1186C442.144 46.0749 442.523 53.5516 442.526 59.7515L442.543 79.0313C440.092 78.9387 436.467 79.4682 434.811 78.6526C434.256 77.761 434.448 77.5659 434.45 76.3786L434.49 20.8843L441.695 20.8645C441.839 23.4647 441.637 27.2618 441.589 29.973C445.946 23.4857 449.748 21.1565 457.627 20.4908Z"/>
+      <path d="M470.103 35.6157C473.155 25.5836 478.751 20.9881 489.22 19.6316C499.52 18.2968 511.892 20.858 515.681 31.8753C516.431 34.0552 516.537 36.1412 516.999 38.3794V78.9846C514.638 78.9227 512.22 78.9916 509.855 79.0342C509.862 75.8149 509.887 72.5957 509.93 69.3765C509.362 70.2311 508.749 71.1696 508.12 71.9867C498.704 84.2231 470.471 84.4967 468.098 65.958C466.369 52.4575 476.222 47.2773 487.766 45.3325C494.837 44.1412 501.89 43.2198 509.092 42.3725C508.784 36.308 507.467 29.3104 500.716 27.7096C490.422 25.2673 481.407 27.3434 477.961 38.0216C475.434 37.3496 472.617 36.4155 470.103 35.6157ZM480.685 71.7537C482.907 73.6489 487.935 73.8475 490.79 73.6265C503.584 72.6367 509.572 62.3628 509.044 50.4538C509.029 50.1618 508.868 49.7693 508.736 49.5093C508.105 49.2106 508.115 49.3304 507.32 49.395C499.164 50.8318 483.316 50.79 477.628 58.0325C474.49 62.0298 475.853 68.4617 480.274 71.4912C480.407 71.5835 480.544 71.6711 480.685 71.7537Z"/>
+      <path d="M95.0488 80.7824C97.1835 77.647 103.684 71.159 106.508 68.1512C114.526 59.5548 122.592 51.0021 130.704 42.4933L144.308 27.9535C145.775 26.4108 148.806 22.994 150.472 21.8148C152.811 24.0333 155.066 26.3386 157.232 28.7255C155.73 31.0179 146.651 40.1959 144.409 42.561C135.609 52.0037 126.749 61.3899 117.828 70.7193L177.8 70.7206C178.102 72.7812 179.08 79.011 178.848 80.7824H95.0488Z"/>
+      <path d="M28.5032 21.8321C31.3858 24.3344 36.5131 30.1179 39.3241 33.1159L59.2028 54.295L76.72 72.8451C77.8873 74.0865 83.2335 79.6323 83.8893 80.7824H0V78.6541C0.64364 76.0298 0.645914 73.4294 1.26851 70.7273L61.2251 70.7231L33.943 41.8228C32.0921 39.8541 22.9407 30.4393 22.1179 28.7446C22.4129 27.102 27.139 23.0407 28.5032 21.8321Z"/>
+      <path d="M69.8163 0H70.6261L83.0225 28.6227C84.7502 32.6084 87.5785 39.7085 89.483 43.3372C90.8441 40.9132 93.2496 34.8525 94.4371 32.0825L102.97 12.3529C104.655 8.44944 106.54 3.69538 108.453 0H109.172C110.318 0.547959 116.488 2.13164 117.957 2.49373C117.162 5.10777 115.254 9.15459 114.117 11.7546L107.406 27.1565L96.232 52.9334C94.0739 57.8991 91.8716 63.2575 89.5059 68.0959C81.4043 50.7999 74.3501 32.7536 66.4641 15.3356C64.5768 11.1671 62.6373 6.76643 60.9258 2.53131C62.6747 2.14045 68.2029 0.548131 69.8163 0Z"/>
+      <path d="M346.624 0H354.758C354.909 2.45515 354.803 6.07421 354.801 8.62462L354.798 24.8597L354.846 79.0324C352.077 78.9439 349.386 78.9897 346.619 79.0292L346.624 0Z"/>
+    </g></symbol></svg>
+
+<script>
+(() => {
+  /* ---------- products: click a product → swap the window; arrow → product page ---------- */
+  const PRODUCTS = {
+    'fundraising': { product: 'Fundraising', crumb: 'Year-end appeal', tile: 'pl-fundraising-tile', title: 'Year-end appeal', sub: 'Campaign · Dec 1 – 31', status: 'Live',
+      amount: '$248,310', of: 'of $300,000', filled: 38, from: [0xc9,0xbe,0xf5], to: [0x5b,0x3f,0xd4], left: '83% of goal', right: '18 days left',
+      stats: [['Donors','1,284','+8%'],['Avg. gift','$193','+3%'],['Monthly','312']],
+      listTitle: 'Recent gifts', rows: [['MR','Maria Ruiz','Monthly','$250','2m'],['JO','James Okafor','','$100','14m'],['LH','Lin Hart','','$1,000','1h']],
+      insight: '38 donors usually give in December.' },
+    'donor-management': { product: 'Donor Management', crumb: 'Major donors', tile: 'pl-donor-management', title: 'Major donors', sub: 'Segment · 214 profiles', status: 'Synced',
+      amount: '78%', of: 'retention rate', filled: 36, from: [0xd9,0xc6,0xee], to: [0x81,0x4d,0xc8], left: '+6 pts year over year', right: 'Updated today',
+      stats: [['Donors','214','+4%'],['Avg. gift','$6,640','+9%'],['Lapsed','12']],
+      listTitle: 'Recent activity', rows: [['MR','Maria Ruiz','Upgraded','$5,000','1d'],['JO','James Okafor','','Event RSVP','2d'],['LH','Lin Hart','','Thank-you sent','3d']],
+      insight: '12 donors are due for a thank-you call this week.' },
+    'mission-assistant': { product: 'Mission Assistant', crumb: 'Board report', tile: 'pl-mission-assistant', title: 'Q4 board report', sub: 'Draft · Fund Accounting + Fundraising', status: 'Draft',
+      amount: '6 of 8', of: 'sections drafted', filled: 34, from: [0xf3,0xc6,0xd2], to: [0xd4,0x63,0x7f], left: 'Sources: 4 products', right: 'Ready in ~2 min',
+      stats: [['Hours saved','11','+3'],['Insights','24'],['Tasks','7']],
+      listTitle: 'Suggested next steps', rows: [['FR','Follow up lapsed donors','','42','Now'],['GM','Draft Hartwell report','','Due','Nov 12'],['FA','Review restricted funds','','3','Today']],
+      insight: 'Restricted revenue is up 12% versus last quarter.' },
+    'grant-management': { product: 'Grant Management', crumb: 'Hartwell Foundation', tile: 'pl-grant-management', title: 'Hartwell Foundation', sub: 'Grant · Youth programs', status: 'Active',
+      amount: '$120,000', of: 'awarded', filled: 30, from: [0xc4,0xd8,0xc9], to: [0x44,0x72,0x53], left: '64% spent', right: 'Report due Nov 12',
+      stats: [['Grants','18','+2'],['Pipeline','$1.2M','+14%'],['Due soon','3']],
+      listTitle: 'Upcoming deadlines', rows: [['HF','Hartwell Foundation','Report','Nov 12','2w'],['CY','City Youth Fund','','Nov 21','3w'],['AC','Arts Council','','Nov 28','4w']],
+      insight: '3 reports are due before Nov 30.' },
+    'fund-accounting': { product: 'Fund Accounting', crumb: 'October close', tile: 'pl-fund-accounting', title: 'October close', sub: 'Month-end · General fund', status: 'In review',
+      amount: '142', of: 'of 146 matched', filled: 44, from: [0xbf,0xcd,0xd8], to: [0x2f,0x59,0x7a], left: '97% reconciled', right: '4 to review',
+      stats: [['Funds','9'],['Revenue','$412K','+6%'],['Expenses','$318K']],
+      listTitle: 'Recent transactions', rows: [['YE','Year-end appeal deposit','Matched','$24,800','2h'],['HF','Hartwell grant','','$60,000','1d'],['PS','Payroll · Programs','','$41,200','2d']],
+      insight: 'Gifts were posted to the right funds automatically.' }
+  };
+  const panel = document.getElementById('panel');
+  const crumbProduct = document.querySelector('[data-f="product"]'), crumb = document.querySelector('[data-f="crumb"]');
+  const rgb = (a, b, k) => `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * k)).join(',')})`;
+  function renderPanel(d) {
+    const ticks = Array.from({ length: 46 }, (_, i) => i < d.filled ? `<i style="background:${rgb(d.from, d.to, d.filled > 1 ? i / (d.filled - 1) : 1)}"></i>` : '<i class="off"></i>').join('');
+    const stats = d.stats.map(([l, v, dl]) => `<div><small>${l}</small><div class="v"><b>${v}</b>${dl ? `<span class="delta">${dl}</span>` : ''}</div></div>`).join('');
+    const rows = d.rows.map(([av, nm, tag, amt, ago]) => `<div class="gift"><span class="av">${av}</span><span class="nm">${nm}${tag ? `<span class="tag">${tag === 'Monthly' ? '<img src="assets/icon-repeat.svg" width="10" height="10" alt="">' : ''}${tag}</span>` : ''}</span><span class="amt">${amt}</span><span class="ago">${ago}</span></div>`).join('');
+    crumbProduct.textContent = d.product; crumb.textContent = d.crumb;
+    panel.innerHTML = `
+      <div class="campaign"><img class="lg" src="assets/${d.tile}.svg" width="36" height="36" alt=""><div class="tt"><b>${d.title}</b><span>${d.sub}</span></div>
+        <div class="status"><span class="dot"><img src="assets/status-dot.svg" width="16" height="16" alt=""></span>${d.status}</div></div>
+      <div class="raised"><div class="amount"><b>${d.amount}</b><span>${d.of}</span></div><div class="ticks">${ticks}</div><div class="lbls"><b>${d.left}</b><span>${d.right}</span></div></div>
+      <div class="stats3">${stats}</div>
+      <div class="gifts"><div class="hd">${d.listTitle}</div>${rows}</div>
+      <div class="ma"><span class="spark"><img src="assets/icon-spark.svg" width="14" height="14" alt=""></span><div class="tx"><small>Mission Assistant</small><span>${d.insight}</span></div></div>`;
+  }
+  renderPanel(PRODUCTS.fundraising);
+  const tabs = [...document.querySelectorAll('.p-item')];
+  let swapTimer = 0;
+  function select(tab, focus) {
+    if (tab.classList.contains('is-active')) return;
+    tabs.forEach(t => { const on = t === tab; t.classList.toggle('is-active', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    if (focus) tab.focus();
+    panel.classList.add('is-swapping');
+    clearTimeout(swapTimer);
+    swapTimer = setTimeout(() => { renderPanel(PRODUCTS[tab.dataset.product]); panel.classList.remove('is-swapping'); }, 180);
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', e => { if (e.target.closest('.p-go')) return; select(tab); });   // arrow keeps its link
+    tab.addEventListener('keydown', e => {
+      const k = e.key;
+      if (k === 'Enter' || k === ' ') { if (e.target === tab) { e.preventDefault(); select(tab); } }
+      if (k === 'ArrowDown' || k === 'ArrowUp') { e.preventDefault(); select(tabs[(i + (k === 'ArrowDown' ? 1 : tabs.length - 1)) % tabs.length], true); }
+    });
+  });
+
+  /* seamless marquee: duplicate the strip */
+  const strip = document.getElementById('strip');
+  strip.innerHTML += strip.innerHTML;
+  [...strip.children].slice(8).forEach(n => n.setAttribute('aria-hidden', 'true'));
+
+  const html = document.documentElement;
+  const page = document.getElementById('page');
+  const main = document.getElementById('main');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* easing from the motion spec */
+  function bezier(x1, y1, x2, y2) {
+    const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+    const sx = t => ((ax * t + bx) * t + cx) * t, sy = t => ((ay * t + by) * t + cy) * t, dx = t => (3 * ax * t + 2 * bx) * t + cx;
+    return x => { if (x <= 0) return 0; if (x >= 1) return 1; let t = x;
+      for (let i = 0; i < 6; i++) { const d = sx(t) - x; if (Math.abs(d) < 1e-5) break; const dd = dx(t); if (Math.abs(dd) < 1e-6) break; t -= d / dd; }
+      return sy(Math.min(1, Math.max(0, t))); };
+  }
+  const eMove = bezier(.22, 1, .36, 1), eInset = bezier(.65, 0, .35, 1);
+  const clamp01 = v => Math.max(0, Math.min(1, v));
+  const prog = (t, a, b) => clamp01((t - a) / (b - a));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const lerpRect = (p, q, k) => ({ l: lerp(p.l, q.l, k), t: lerp(p.t, q.t, k), r: lerp(p.r, q.r, k), b: lerp(p.b, q.b, k) });
+
+  /* timeline (ms) — storyboard frames 01–10 */
+  const T = {
+    mark: [[100, 350], [250, 500], [400, 650]],   // 02–04  mark parts: 250 ms, 150 ms stagger
+    rays: [750, 1150],                            // 05     radial reveal, 400 ms
+    hold: 1150,                                   // 06     wait here until assets are ready
+    fan: [1200, 1700],                            // 07     rays → V fan + wordmark
+    // 08 is merged into 09: one overlapping "landing" phase instead of two sequential steps.
+    // The logo leads, the frame follows 50 ms later, the page fades in behind them.
+    fly: [1650, 2200],                            // logo FLIP to header (starts on the fan's ease-out tail)
+    inset: [1700, 2250],                          // frame: full screen → hero card in one move (top + sides together)
+    nav: 1900,                                    // nav + CTA fade in once the logo is halfway
+    rule: 1950,                                   // header rule draws
+    hero: 2000,                                   // badge → H1 → text → CTA, 60 ms stagger
+    block: [2250, 2700],                          // 10     gradient block rises
+    end: 2750
+  };
+
+  function buildOverlay() {
+    const o = document.createElement('div');
+    o.id = 'intro'; o.setAttribute('aria-hidden', 'true');
+    o.innerHTML = `<div class="ld-border"></div><div class="ld-fill"></div>
+      <svg class="ld-rays"><defs><clipPath id="ldRect"><rect/></clipPath><clipPath id="ldCirc"><circle r="0"/></clipPath></defs>
+      <g clip-path="url(#ldRect)"><g clip-path="url(#ldCirc)" class="ld-raygroup">${'<line/>'.repeat(6)}</g></g></svg>
+      <svg class="ld-logo" viewBox="0 0 517 81">${document.getElementById('velora-wordmark').innerHTML}</svg>
+      <div class="ld-counter">0%</div>`;
+    document.body.appendChild(o);
+    const p = o.querySelectorAll('.ld-logo path');   // o, e, V, r, a, Mark R, Mark L, Mark C, l
+    return { root: o, border: o.querySelector('.ld-border'), fill: o.querySelector('.ld-fill'),
+      rect: o.querySelector('#ldRect rect'), circ: o.querySelector('#ldCirc circle'),
+      raysG: o.querySelector('.ld-raygroup'), lines: [...o.querySelectorAll('.ld-raygroup line')],
+      logo: o.querySelector('.ld-logo'), counter: o.querySelector('.ld-counter'),
+      marks: [p[6], p[7], p[5]], letters: [p[2], p[1], p[8], p[0], p[3], p[4]] };
+  }
+
+  /* real progress: fonts + window load (never fakes 100 %) */
+  function makeProgress() {
+    const s = { shown: 0, fontsDone: !document.fonts, loadDone: document.readyState === 'complete' };
+    if (document.fonts) document.fonts.ready.then(() => { s.fontsDone = true; });
+    if (!s.loadDone) addEventListener('load', () => { s.loadDone = true; }, { once: true });
+    s.target = () => {
+      let f = 1;
+      if (!s.fontsDone) { let req = 0, ok = 0; document.fonts.forEach(ff => { if (ff.status !== 'unloaded') { req++; if (ff.status === 'loaded') ok++; } }); f = req ? ok / req : 0; }
+      return f * .75 + (s.loadDone ? .25 : 0);
+    };
+    s.ready = () => s.fontsDone && s.loadDone;
+    return s;
+  }
+
+  function geom() {
+    const vw = innerWidth, vh = innerHeight, mobile = vw < 820, rail = mobile ? 8 : 11, pr = page.getBoundingClientRect();
+    const hero = document.getElementById('hero').getBoundingClientRect();
+    const hl = document.getElementById('headerLogo').getBoundingClientRect();
+    const S = { l: rail, t: 13, r: vw - rail, b: vh - 12 };   // 01 full screen — frame opens to the viewport edges
+    const M = { l: S.l, t: 79, r: S.r, b: S.b };                // 08 top step
+    const F = { l: hero.left, t: hero.top, r: hero.right, b: hero.bottom }; // 09 page position
+    return { vw, vh, S, M, F, hl, s0: mobile ? 320 / 517 : 1, heroH: document.getElementById('heroArea').offsetHeight };
+  }
+  // hero fan in a frame's coordinates — same geometry as assets/hero-decor-lines.svg
+  function fanFor(fr, heroH) {
+    const x0 = fr.l + 1, y0 = fr.t + 1, w = fr.r - fr.l - 2, k = w / 1396, ky = heroH / 568;
+    const C = { x: x0 + 698 * k, y: y0 + 568 * ky };
+    const ang = [[-0.01, 165], [363.5, -0.5], [1032, -0.5], [1394.28, 166]].map(([x, y]) => Math.atan2(y0 + y * ky - C.y, x0 + x * k - C.x));
+    return { C, ang, clip: { l: x0, t: y0, r: x0 + w, b: y0 + 568 * ky } };
+  }
+  const nearest = (from, to) => { let d = to - from; while (d > Math.PI / 2) d -= Math.PI; while (d <= -Math.PI / 2) d += Math.PI; return from + d; };
+
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  function play() {
+    scrollTo(0, 0);
+    html.classList.add('js-intro', 'is-intro');
+    main.setAttribute('aria-busy', 'true');
+    const ov = buildOverlay(), pr = makeProgress(), deg = d => d * Math.PI / 180;
+    // Rays start at the tips of the mark's six strokes and continue each stroke outward (frames 05–06),
+    // then pivot down to the hero's convergence point and rotate into the four fan lines (frame 07).
+    // Tip points are in wordmark units (517 × 81). The two base rays fold into the outer fan lines and fade.
+    const RAYS = [
+      { x: 0.3,   y: 75.75, a: deg(180),    to: 0, extra: true },   // left base
+      { x: 25.3,  y: 25.3,  a: deg(-135),   to: 0 },                // left arm
+      { x: 65.4,  y: 1.3,   a: deg(-109.3), to: 1 },                // peak, left stroke
+      { x: 113.6, y: 1.3,   a: deg(-70.7),  to: 2 },                // peak, right stroke
+      { x: 153.7, y: 25.3,  a: deg(-45),    to: 3 },                // right arm
+      { x: 178.7, y: 75.75, a: deg(0),      to: 3, extra: true }    // right base
+    ];
+    let offset = 0, holdFrom = null; const t0 = performance.now(); const fired = new Set();
+    const once = (k, fn) => { if (!fired.has(k)) { fired.add(k); fn(); } };
+
+    function frame(now) {
+      let t = now - t0 - offset;
+      const g = geom(), ready = pr.ready();
+      if (t >= T.hold && t < T.fan[0] && !ready) { if (holdFrom === null) holdFrom = now; t = T.hold; }   // slow network: hold on 06
+      else if (holdFrom !== null) { offset += now - holdFrom; holdFrom = null; t = now - t0 - offset; }
+
+      /* white frame: 13/11 → top 79 → page position */
+      const fr = lerpRect(g.S, g.F, eInset(prog(t, ...T.inset)));
+      const ins = (r, rad) => `inset(${r.t}px ${g.vw - r.r}px ${g.vh - r.b}px ${r.l}px round ${rad}px)`;
+      ov.border.style.clipPath = ins(fr, 6);
+      ov.fill.style.clipPath = ins({ l: fr.l + 1, t: fr.t + 1, r: fr.r - 1, b: fr.b - 1 }, 5);
+
+      /* logo */
+      const s0 = g.s0, cx = g.vw / 2, cy = (g.S.t + g.S.b) / 2;
+      const markX = cx - 89.5 * s0, wordX = cx - 258.5 * s0, y0 = cy - 40 * s0;
+      let lx = lerp(markX, wordX, eMove(prog(t, ...T.fan))), ly = y0, ls = s0;
+      if (t >= T.fly[0]) { const k = eMove(prog(t, ...T.fly)); lx = lerp(wordX, g.hl.left, k); ly = lerp(y0, g.hl.top, k); ls = lerp(s0, g.hl.width / 517, k); }
+      ov.logo.style.transform = `translate(${lx}px,${ly}px) scale(${ls})`;
+      ov.marks.forEach((p, i) => { const k = eMove(prog(t, ...T.mark[i])); p.style.opacity = k; p.style.transform = `translateY(${(1 - k) * 10}px)`; });
+      ov.letters.forEach((p, i) => { const a = T.fan[0] + 40 + i * 45, k = eMove(prog(t, a, a + 250)); p.style.opacity = k; p.style.transform = `translateX(${(1 - k) * -8}px)`; });
+
+      /* counter */
+      pr.shown += (pr.target() * 100 - pr.shown) * .12;
+      ov.counter.textContent = (ready && pr.shown > 99 ? 100 : Math.floor(pr.shown)) + '%';
+      const cOut = eMove(prog(t, T.fan[0], T.fan[0] + 250));
+      ov.counter.style.opacity = prog(t, 0, 200) * (1 - cOut);
+      ov.counter.style.transform = `translate(${cx}px,${y0 + 106 * s0 - cOut * 10}px)`;
+
+      /* rays → fan */
+      const O = { x: lx + 89.5 * ls, y: ly + 40 * ls }, fan = fanFor(fr, g.heroH), u = eMove(prog(t, ...T.fan));
+      const clip = lerpRect({ l: fr.l + 1, t: fr.t + 1, r: fr.r - 1, b: fr.b - 1 }, fan.clip, u);
+      ov.rect.setAttribute('x', clip.l); ov.rect.setAttribute('y', clip.t);
+      ov.rect.setAttribute('width', Math.max(0, clip.r - clip.l)); ov.rect.setAttribute('height', Math.max(0, clip.b - clip.t));
+      ov.circ.setAttribute('r', 1e5);
+      const maxR = Math.hypot(g.vw, g.vh) * 1.5;
+      RAYS.forEach((ray, i) => {
+        const tip = { x: lx + ray.x * ls, y: ly + ray.y * ls };
+        const A = { x: lerp(tip.x, fan.C.x, u), y: lerp(tip.y, fan.C.y, u) };          // ray origin slides to the convergence point
+        let tgt = fan.ang[ray.to]; while (tgt - ray.a > Math.PI) tgt -= 2 * Math.PI; while (tgt - ray.a < -Math.PI) tgt += 2 * Math.PI;
+        const ang = lerp(ray.a, tgt, u);                                               // …while rotating into its fan angle
+        const a0 = T.rays[0] + i * 40, grow = eMove(prog(t, a0, a0 + (T.rays[1] - T.rays[0])));   // 05: grow outward, slight stagger
+        const L = maxR * grow, ln = ov.lines[i];
+        ln.setAttribute('x1', A.x); ln.setAttribute('y1', A.y);
+        ln.setAttribute('x2', A.x + Math.cos(ang) * L); ln.setAttribute('y2', A.y + Math.sin(ang) * L);
+        ln.style.opacity = ray.extra ? 1 - eMove(prog(t, T.fan[0] + 150, T.fan[1])) : 1;
+      });
+      ov.raysG.style.opacity = holdFrom !== null ? .8 + .2 * Math.cos((now - holdFrom) / 1600 * Math.PI * 2) : 1;
+
+      /* page */
+      if (t >= T.nav) once('nav', () => html.classList.add('s-nav'));
+      if (t >= T.fly[1]) once('logo', () => { html.classList.add('s-logo'); ov.logo.style.visibility = 'hidden'; });
+      if (t >= T.rule) once('rule', () => html.classList.add('s-rule'));
+      if (t >= T.hero) once('hero', () => html.classList.add('s-hero'));
+      if (t >= T.block[0]) once('block', () => html.classList.add('s-block'));
+      if (t >= T.end) return finish();
+      requestAnimationFrame(frame);
+    }
+    function finish() {
+      ov.root.remove();
+      html.classList.remove('is-intro');
+      main.setAttribute('aria-busy', 'false');
+      setTimeout(() => html.classList.remove('js-intro', 's-nav', 's-logo', 's-rule', 's-hero', 's-block'), 700);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (reduced) document.body.classList.add('fade-in');   // prefers-reduced-motion: no loader, 200 ms fade
+  else play();                                          // every page load
+  // restored from back/forward cache counts as a reload too
+  addEventListener('pageshow', e => { if (e.persisted && !reduced) location.reload(); });
+})();
+</script>
+</body>
+</html>
